@@ -29,7 +29,7 @@ Create a file called `netlify.toml` in the root of your project. Copy and paste 
 
 ```bash
 [build]
-  command = "npm run build && rm sanity-cms"
+  command = "rm -rf sanity-cms && npm run build"
   publish = ".next"
 
 [[plugins]]
