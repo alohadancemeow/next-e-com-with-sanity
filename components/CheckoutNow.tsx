@@ -11,7 +11,7 @@ export default function CheckoutNow({
   image,
   name,
   price,
-  price_id,
+  id,
 }: ProductCart) {
   const { checkoutSingleItem } = useShoppingCart();
 
@@ -25,13 +25,14 @@ export default function CheckoutNow({
     price: price,
     currency: currency,
     image: urlFor(image).url(),
-    price_id: price_id,
+    id: id,
   };
+
   return (
     <Button
       variant="outline"
       onClick={() => {
-        buyNow(product.price_id);
+        buyNow(product.id);
       }}
     >
       Buy Now

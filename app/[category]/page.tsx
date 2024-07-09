@@ -2,6 +2,7 @@ import Link from "next/link";
 import { simplifiedProduct } from "@/types/interface";
 import { client } from "@/lib/sanity";
 import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 async function getData(cateogry: string) {
   const query = `*[_type == "product" && category->name == "${cateogry}"] {
@@ -14,11 +15,10 @@ async function getData(cateogry: string) {
       }`;
 
   const data = await client.fetch(query);
+  revalidatePath("/[category]", "page");
 
   return data;
 }
-
-// export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({
   params,

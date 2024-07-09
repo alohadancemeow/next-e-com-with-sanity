@@ -20,20 +20,33 @@ export default function ShoppingCartModal() {
     removeItem,
     totalPrice,
     redirectToCheckout,
+    clearCart,
   } = useShoppingCart();
+
+  const createSession = async (lineItems: any) =>
+    await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(lineItems),
+    })
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((err) => console.log(err));
 
   async function handleCheckoutClick(event: any) {
     event.preventDefault();
 
     try {
-      const result = await redirectToCheckout();
-      if (result?.error) {
-        console.log("result");
-      }
+      const session = await createSession(cartDetails);
+      await redirectToCheckout(session?.id);
+      clearCart();
     } catch (error) {
       console.log(error);
     }
   }
+
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
       <SheetContent className="sm:max-w-lg w-[90vw]">
@@ -48,8 +61,8 @@ export default function ShoppingCartModal() {
                 <h1 className="py-6">You dont have any items</h1>
               ) : (
                 <>
-                  {Object.values(cartDetails ?? {}).map((entry) => (
-                    <li key={entry.id} className="flex py-6">
+                  {Object.values(cartDetails ?? {}).map((entry, i) => (
+                    <li key={i} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <Image
                           src={entry.image as string}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { simplifiedProduct } from "@/types/interface";
 import { client } from "@/lib/sanity";
 import Image from "next/image";
-import { Suspense } from "react";
+import { revalidatePath } from "next/cache";
 
 async function getData() {
   const query = `*[_type == "product"] | order(_createdAt desc) {
@@ -15,11 +15,11 @@ async function getData() {
       }`;
 
   const data = await client.fetch(query);
+  revalidatePath("/products", "page");
 
   return data;
 }
 
-// export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   const data: simplifiedProduct[] = await getData();

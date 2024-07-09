@@ -2,6 +2,7 @@ import { fullProduct } from "@/types/interface";
 import { client } from "@/lib/sanity";
 import { Button } from "@/components/ui/button";
 import { Star, Truck } from "lucide-react";
+
 import ImageGallery from "@/components/ImageGallery";
 import AddToBag from "@/components/AddToBag";
 import CheckoutNow from "@/components/CheckoutNow";
@@ -16,15 +17,12 @@ async function getData(slug: string) {
           description,
           "slug": slug.current,
           "categoryName": category->name,
-          price_id
       }`;
 
   const data = await client.fetch(query);
 
   return data;
 }
-
-// export const dynamic = "force-dynamic";
 
 export default async function ProductPge({
   params,
@@ -87,8 +85,7 @@ export default async function ProductPge({
                 image={data.images[0]}
                 name={data.name}
                 price={data.price}
-                key={data._id}
-                price_id={data.price_id}
+                id={data._id}
               />
               <CheckoutNow
                 currency="USD"
@@ -96,8 +93,7 @@ export default async function ProductPge({
                 image={data.images[0]}
                 name={data.name}
                 price={data.price}
-                key={data._id}
-                price_id={data.price_id}
+                id={data._id}
               />
             </div>
 
@@ -108,7 +104,7 @@ export default async function ProductPge({
         </div>
       </div>
 
-      <Newest  />
+      <Newest />
     </div>
   );
 }

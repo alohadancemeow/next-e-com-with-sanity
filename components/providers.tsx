@@ -6,13 +6,9 @@ import { CartProvider as USCProvider } from "use-shopping-cart";
 export default function CartProvider({ children }: { children: ReactNode }) {
   return (
     <USCProvider
-      mode="payment"
-      cartMode="client-only"
+      cartMode="checkout-session"
       stripe={process.env.NEXT_PUBLIC_STRIPE_KEY as string}
-      successUrl={`https://commerce-next-yt.vercel.app/stripe/succes`}
-      cancelUrl={`https://commerce-next-yt.vercel.app/stripe/error`}
       currency="USD"
-      billingAddressCollection={false}
       shouldPersist={true}
       language="en-US"
     >

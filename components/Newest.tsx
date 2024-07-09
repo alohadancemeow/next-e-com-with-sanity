@@ -3,6 +3,7 @@ import { simplifiedProduct } from "@/types/interface";
 import { client } from "@/lib/sanity";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 async function getData() {
   const query = `*[_type == "product"][0...4] | order(_createdAt desc) {
@@ -15,6 +16,7 @@ async function getData() {
       }`;
 
   const data = await client.fetch(query);
+  revalidatePath("/");
 
   return data;
 }

@@ -7,6 +7,7 @@ import CartProvider from "@/components/providers";
 import ShoppingCartModal from "@/components/ShippingCartModal";
 import { client } from "@/lib/sanity";
 import { Suspense } from "react";
+import { revalidatePath } from "next/cache";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,8 @@ async function getCategories() {
   const query = "*[_type == 'category']";
 
   const data = await client.fetch(query);
+
+  revalidatePath("/");
 
   return data;
 }

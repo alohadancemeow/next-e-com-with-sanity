@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "@/lib/sanity";
+import { Product } from "use-shopping-cart/core";
 
 export interface ProductCart {
   name: string;
@@ -10,7 +11,7 @@ export interface ProductCart {
   price: number;
   currency: string;
   image: any;
-  price_id: string;
+  id: string;
 }
 
 export default function AddToBag({
@@ -19,9 +20,10 @@ export default function AddToBag({
   image,
   name,
   price,
-  price_id,
+  id,
 }: ProductCart) {
-  const { addItem, handleCartClick } = useShoppingCart();
+  const { addItem, handleCartClick, cartDetails, incrementItem } =
+    useShoppingCart();
 
   const product = {
     name: name,
@@ -29,12 +31,21 @@ export default function AddToBag({
     price: price,
     currency: currency,
     image: urlFor(image).url(),
-    price_id: price_id,
+    id: id,
+  } as Product;
+
+  const handleAddToCart = (id: string) => {
+    if (cartDetails && Object.keys(cartDetails).includes(id)) {
+      incrementItem(id);
+    } else {
+      addItem(product);
+    }
   };
+
   return (
     <Button
       onClick={() => {
-        addItem(product), handleCartClick();
+        handleAddToCart(product.id), handleCartClick();
       }}
     >
       Add To Cart
