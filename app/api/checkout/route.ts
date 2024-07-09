@@ -12,7 +12,17 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const arrayFromData = Object.values(body) as Product[];
-    const line_items = validateCartItems(arrayFromData, body);
+    const productData = validateCartItems(arrayFromData, body);
+
+    const line_items = productData.map((item) => {
+      return {
+        ...item,
+        price_data: {
+          ...item.price_data,
+          unit_amount: Math.round(item.price_data.unit_amount * 100),
+        },
+      };
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -23,6 +33,7 @@ export async function POST(req: Request) {
       mode: "payment",
       success_url: `${process.env.BASE_URL}/stripe/success`,
       cancel_url: `${process.env.BASE_URL}/stripe/error`,
+      currency: "USD",
       line_items,
     });
 

@@ -14,9 +14,7 @@ export default function Navbar({ categories }: { categories: any }) {
     <header className="mb-8 border-b">
       <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
         <Link href="/">
-          <h1 className="text-2xl md:text-4xl font-bold">
-            Book<span className="text-primary">Store</span>
-          </h1>
+          <h1 className="text-2xl md:text-4xl font-bold">Bookstore</h1>
         </Link>
 
         <nav className="flex items-center justify-center gap-12 lg:flex 2xl:ml-16">
@@ -51,7 +49,7 @@ export default function Navbar({ categories }: { categories: any }) {
               className="flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none"
             >
               <ShoppingBag />
-              {cartCount && (
+              {cartCount !== 0 && (
                 <span className="absolute text-center top-5 right-6 text-xs text-white sm:block bg-red-600 rounded-full px-2 py-1">
                   {cartCount}
                 </span>

@@ -9,7 +9,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       cartMode="checkout-session"
       stripe={process.env.NEXT_PUBLIC_STRIPE_KEY as string}
       currency="USD"
-      shouldPersist={true}
+      shouldPersist={false}
       language="en-US"
     >
       {children}

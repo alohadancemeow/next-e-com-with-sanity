@@ -7,6 +7,7 @@ import ImageGallery from "@/components/ImageGallery";
 import AddToBag from "@/components/AddToBag";
 import CheckoutNow from "@/components/CheckoutNow";
 import Newest from "@/components/Newest";
+import { revalidatePath } from "next/cache";
 
 async function getData(slug: string) {
   const query = `*[_type == "product" && slug.current == "${slug}"][0] {
@@ -20,6 +21,8 @@ async function getData(slug: string) {
       }`;
 
   const data = await client.fetch(query);
+
+  revalidatePath("/product/[slug]", "page");
 
   return data;
 }

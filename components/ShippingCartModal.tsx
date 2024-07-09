@@ -7,8 +7,9 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-
 import Image from "next/image";
+
+import { createSession } from "@/lib/helpers";
 import { useShoppingCart } from "use-shopping-cart";
 
 export default function ShoppingCartModal() {
@@ -22,18 +23,6 @@ export default function ShoppingCartModal() {
     redirectToCheckout,
     clearCart,
   } = useShoppingCart();
-
-  const createSession = async (lineItems: any) =>
-    await fetch("/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(lineItems),
-    })
-      .then((response) => response.json())
-      .then((data) => data)
-      .catch((err) => console.log(err));
 
   async function handleCheckoutClick(event: any) {
     event.preventDefault();
@@ -115,7 +104,11 @@ export default function ShoppingCartModal() {
             </p>
 
             <div className="mt-6">
-              <Button onClick={handleCheckoutClick} className="w-full">
+              <Button
+                onClick={handleCheckoutClick}
+                disabled={cartCount === 0}
+                className="w-full"
+              >
                 Checkout
               </Button>
             </div>
