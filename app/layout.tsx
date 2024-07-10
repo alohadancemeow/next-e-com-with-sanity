@@ -8,6 +8,7 @@ import ShoppingCartModal from "@/components/ShippingCartModal";
 import { client } from "@/lib/sanity";
 import { Suspense } from "react";
 import { revalidatePath } from "next/cache";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default async function RootLayout({
           </Suspense>
           <ShoppingCartModal />
           {children}
+          <Footer />
         </CartProvider>
       </body>
     </html>
