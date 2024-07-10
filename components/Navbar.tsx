@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, SquareLibrary } from "lucide-react";
 import { useShoppingCart } from "use-shopping-cart";
 
 export default function Navbar({ categories }: { categories: any }) {
@@ -13,35 +13,38 @@ export default function Navbar({ categories }: { categories: any }) {
   return (
     <header className="mb-8 border-b">
       <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
-        <Link href="/">
+        <Link href="/" className="flex gap-1 items-center">
+          <SquareLibrary className="w-10 h-10" />
           <h1 className="text-2xl md:text-4xl font-bold">Bookstore</h1>
         </Link>
 
-        <nav className="flex items-center justify-center gap-12 lg:flex 2xl:ml-16">
-          <Link
-            className={`md:text-md text-sm font-semibold ${
-              pathname === "/products"
-                ? "text-primary"
-                : "text-gray-600 transition duration-100 hover:text-primary"
-            }`}
-            href={`/products`}
-          >
-            All Products
-          </Link>
-          {categories?.map((link: any, idx: any) => (
-            <div key={idx}>
-              <Link
-                className={`md:text-md text-sm font-semibold ${
-                  pathname === `/${link?.name}`
-                    ? "text-primary"
-                    : "text-gray-600 transition duration-100 hover:text-primary"
-                }`}
-                href={`/${link?.name}`}
-              >
-                {link.name}
-              </Link>
-            </div>
-          ))}
+        <nav className="flex  justify-center gap-12 2xl:ml-16">
+          <div className="gap-12 items-center hidden lg:flex">
+            <Link
+              className={`md:text-md text-sm font-semibold ${
+                pathname === "/products"
+                  ? "text-primary"
+                  : "text-gray-600 transition duration-100 hover:text-primary"
+              }`}
+              href={`/products`}
+            >
+              All Books
+            </Link>
+            {categories?.map((link: any, idx: any) => (
+              <div key={idx}>
+                <Link
+                  className={`md:text-md text-sm font-semibold ${
+                    pathname === `/${link?.name}`
+                      ? "text-primary"
+                      : "text-gray-600 transition duration-100 hover:text-primary"
+                  }`}
+                  href={`/${link?.name}`}
+                >
+                  {link.name}
+                </Link>
+              </div>
+            ))}
+          </div>
           <div className="flex relative">
             <Button
               // variant={"outline"}

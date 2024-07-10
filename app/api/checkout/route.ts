@@ -1,14 +1,7 @@
-import Stripe from "stripe";
+import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
 import { Product } from "use-shopping-cart/core";
 import { validateCartItems } from "use-shopping-cart/utilities";
-
-export const stripe = new Stripe(process.env.STRIPE_API_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-  typescript: true,
-});
-
-export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
