@@ -1,16 +1,17 @@
 # Next.js E-commerce with Sanity #103
 
-This repository showcases a basic functional e-commerce application built using the latest versions of Next.js, TypeScript, and Sanity CMS.
-For learning CMS.
+![Image of shoe store home page](public/Screenshot.png)
 
-**🎉 Key Features:**
+This repository showcases a functional e-commerce application built using the latest versions of Next.js, TypeScript, and Sanity CMS. The project is designed for those looking to learn and implement a CMS.
 
-- **Tech Stack:** Next.js (latest), TypeScript + Sanity
+## **🎉 Key Features:**
+
+- **Tech Stack:** Next.js (latest), TypeScript + Sanity CMS
 - **Inspiration:** [Link to original repository](https://github.com/ski043/nextjs-commerce-tutorial) (adapted for this implementation) 🙏
 - **CMS:** [Sanity.io](https://www.sanity.io/)
-- **Purpose:** For learning CMS
+- **Purpose:** Learn and implement CMS
 
-**👋 Getting Started:**
+## **👋 Getting Started:**
 
 1. Clone this repository.
 2. Install dependencies (`npm install` or `yarn install`).
@@ -23,9 +24,9 @@ STRIPE_API_SECRET_KEY=
 BASE_URL=
 ```
 
-**🚀 Deploy on Netlify**
+## **🚀 Deploy on Netlify**
 
-Create a file called `netlify.toml` in the root of your project. Copy and paste the code snippet below into the netlify.toml file.
+Create a file called `netlify.toml` in the root of your project and paste the following configuration:
 
 ```bash
 [build]
@@ -43,17 +44,23 @@ npm i @netlify/plugin-nextjs
 ```
 
 
-**🖼️ Screenshot:**
-
-![Image of shoe store home page](public/Screenshot.png)
-
-**👋 Contributions Welcome!**
+## **👋 Contributions Welcome!**
 
 Encouraging constructive feedback and pull requests to enhance this project.
 
-**⚠️ Disclaimer:**
+## **⚠️ Disclaimer:**
 
 This repository is currently under development. I will continuously improve and document it. Stay tuned for updates!
 
 
-**🎉 Live site:** https://next-e-com-with-sanity.netlify.app
+Feel free to tweak further based on your preference!
+
+## 📜 **Commands:**
+
+| Command                | Description                                      |
+|------------------------|--------------------------------------------------|
+| `npm run dev`          | Starts the development server.                   |
+| `npm run build`        | Creates an optimized production build.           |
+| `npm start`            | Runs the application in production mode.         |
+| `npm run lint`         | Lints the project for coding style and errors.   |
+| `npm run sanity:start` | Starts the Sanity Studio for content management. |
